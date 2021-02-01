@@ -1,4 +1,8 @@
-function Sum(a,b){
-    return a + b;
+const MathOperations = require('./Operations/MathOperations')
+const Calculation = require('./models/Calculation')
+class Calculator{
+    static Sum(a,b){
+        return new Calculation(a, b, "Sum");
+    }
 }
-module.exports = Sum;
+module.exports = Calculator;

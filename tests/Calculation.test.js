@@ -1,9 +1,8 @@
-const Calculator = require("../src/Calculator");
+const Calculation = require("../src/models/Calculation");
 
 test('Calculator adding two numbers', () => {
-    let calculation = Calculator.Sum(1,2);
+    let calculation = new Calculation(1,2,"Sum");
     expect(calculation.a).toBe(1);
     expect(calculation.b).toBe(2);
     expect(calculation.operation).toBe("Sum");
-    expect(calculation.GetResults()).toBe(3);
 });
