@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node src/Index.js",
+    "start": "node src/Calculator.js",
     "coverage": "jest --coverage",
     "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
   },
@@ -13,6 +13,7 @@
   "author": "Dale Schofield",
   "license": "ISC",
   "devDependencies": {
-    "coveralls": "^3.1.0"
+    "coveralls": "^3.1.0",
+    "jest": "^26.6.3"
   }
 }
