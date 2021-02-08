@@ -1,4 +1,5 @@
 const Calculator = require("../src/Calculator");
+const Calculation = require("../src/models/Calculation");
 const Sum = require('../src/Operations/Sum')
 const Difference = require('../src/Operations/Difference')
 const Product = require('../src/Operations/Product')
@@ -47,4 +48,22 @@ test('Calculator Square Root function', () => {
     expect(calculation.b).toBe(2);
     expect(calculation.operation).toBe(Root);
     expect(calculation.GetResults()).toBe(2);
+});
+test('Calculator ClearHistory', () => {
+    Calculator.Sum(1,2);
+    Calculator.ClearHistory();
+    expect(Calculator.Calculations.length).toBe(0);
+});
+test('Calculator adding to Calculations', () => {
+    Calculator.ClearHistory()
+    Calculator.SquareRoot(4);
+    Calculator.Square(4);
+    Calculator.Sum(4,2);
+    expect(Calculator.Calculations.length).toBe(3);
+    Calculator.Calculations.forEach(function(calculation){
+        expect(calculation).toBeInstanceOf(Calculation)
+    })
+    expect(Calculator.Calculations[0].operation = Root)
+    expect(Calculator.Calculations[1].operation = Power)
+    expect(Calculator.Calculations[2].operation = Sum)
 });

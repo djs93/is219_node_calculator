@@ -7,23 +7,39 @@ const Root = require('./Operations/Root')
 const Calculation = require('./models/Calculation')
 
 class Calculator{
+    static Calculations = [];
     static Sum(a,b){
-        return new Calculation(a, b, Sum);
+        let calculation = new Calculation(a, b, Sum);
+        this.Calculations.push(calculation)
+        return calculation;
     }
     static Difference(a,b){
-        return new Calculation(a, b, Difference);
+        let calculation = new Calculation(a, b, Difference);
+        this.Calculations.push(calculation)
+        return calculation;
     }
     static Product(a,b){
-        return new Calculation(a, b, Product);
+        let calculation = new Calculation(a, b, Product);
+        this.Calculations.push(calculation)
+        return calculation;
     }
     static Quotient(a,b){
-        return new Calculation(a, b, Quotient);
+        let calculation = new Calculation(a, b, Quotient);
+        this.Calculations.push(calculation)
+        return calculation;
     }
     static Square(a){
-        return new Calculation(a, 2, Power);
+        let calculation = new Calculation(a, 2, Power);
+        this.Calculations.push(calculation)
+        return calculation;
     }
     static SquareRoot(a){
-        return new Calculation(a, 2, Root);
+        let calculation = new Calculation(a, 2, Root);
+        this.Calculations.push(calculation)
+        return calculation;
+    }
+    static ClearHistory(){
+        this.Calculations = [];
     }
 }
 module.exports = Calculator;
