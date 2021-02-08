@@ -5,6 +5,6 @@ module.exports = class Calculation{
         this.operation = operation;
     }
     GetResults(){
-        return this.a + this.b;
+        return this.operation(this.a,this.b);
     }
 }
