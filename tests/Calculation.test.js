@@ -1,4 +1,4 @@
-const Calculation = require("../src/models/Calculation");
+const Calculation = require("../src/Models/Calculation");
 const Sum = require('../src/Operations/Sum')
 const Difference = require('../src/Operations/Difference')
 const Product = require('../src/Operations/Product')

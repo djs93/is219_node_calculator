@@ -4,7 +4,7 @@ const Product = require('./Operations/Product')
 const Quotient = require('./Operations/Quotient')
 const Power = require('./Operations/Power')
 const Root = require('./Operations/Root')
-const Calculation = require('./models/Calculation')
+const Calculation = require('./Models/Calculation')
 
 class Calculator{
     static Calculations = [];
