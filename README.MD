@@ -1,10 +1,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/djs93/is219_node_calculator/badge.svg?branch=master)](https://coveralls.io/github/djs93/is219_node_calculator?branch=master)
 [![Build Status](https://travis-ci.org/djs93/is219_node_calculator.svg?branch=master)](https://travis-ci.org/djs93/is219_node_calculator)
-#IS219 Calculator
+# IS219 Calculator
 
 ---
-##SOLID Principles
-###S - Single Responsibility Principle
+## SOLID Principles
+### S - Single Responsibility Principle
 This project tries to follow this principle as close as possible. 
 Before I even learned about these principles I strove to separate my functions into bite-sized pieces because it just
 made sense.
@@ -18,7 +18,7 @@ function Sum(a, b){
 }
 ```
 It is short and does one thing. All the Operations follow this same principle.
-###O - Open-Closed Principle
+### O - Open-Closed Principle
 This principle is followed in the case of [the calculator](https://github.com/djs93/is219_node_calculator/blob/master/src/Calculator.js).
 By having the function to add custom calculations to the history, we allow extension of what can be done but not modification
 of operations already in place. 
@@ -29,7 +29,7 @@ static AddCalculation(calculation){
 ```
 We also see this in the history of the calculator. We don't have to directly modify the 
 history array to clear it or append to it. 
-###L - Liskov Substitution Principle
+### L - Liskov Substitution Principle
 This principle is followed in the case of [the Calculations](https://github.com/djs93/is219_node_calculator/blob/master/src/Models/Calculation.js).
 All calculations can be substituted and still function the same. They all use `.GetResults()` to return their respective 
 result. It doesn't matter if the function is to Sum or calculate the Product, the Calculation functions the same (not in
@@ -39,7 +39,7 @@ GetResults(){
     return this.operation(this.a,this.b);
 }
 ```
-###I - Interface Segregation
+### I - Interface Segregation
 For the Calculator, you only need the bare essentials. You don't need to create your own Calculations for every 
 operation unless you want to extend the functionality of the base Calculator. For every Calculation as well, you only
 need your operation and the two operands.
@@ -51,7 +51,7 @@ class Calculation{
         this.operation = operation;
     }
 ```
-###D - Dependency Inversion Principle
+### D - Dependency Inversion Principle
 This principle states that an object receives other objects that it depends on. The dependencies in this project would 
 be the individual operations. They are passed into the Calculation class used by the Calculator, the calculator does not
 contain these behaviors themselves. 
@@ -63,8 +63,8 @@ static Sum(a,b){
 ```
 
 ---
-##Object Oriented Programming Concepts
-###Encapsulation
+## Object Oriented Programming Concepts
+### Encapsulation
 In Javascript, encapsulation is acheived by using Closures. A great example of this concept is this piece of code from
 [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures):
 ```javascript
@@ -97,7 +97,7 @@ myFunc();
 ```
 This would make the operation's result the only accessible field. We do not want to do this later on, however, because
 we want to see the calculation history, requiring us to need to see the `a`, `b`, and `operation`.
-###Abstraction
+### Abstraction
 This concept is essentially making unique objects (like individual people) into a generic class to be reused to create
 more unique objects (such as a generic Person class being used to make unique people).
 
@@ -116,7 +116,7 @@ class Calculation{
 ```
 By using this, we're not making a special class just for Sum calculations. We're abstracting it to a general 
 calculation we can use for many different operations.
-###Inheritance
+### Inheritance
 This concept uses the idea that objects in real life often share similar characteristics. All teachers are people, for
 instance. This means that in OOP, a `Teacher` class could derive (or inherit) from a `Person` class, and it would make
 sense.
@@ -132,7 +132,7 @@ class ScientificCalculator extends Calculator{
 }
 ```
 It would still have the `Sum`, `Product`, etc. functions as `Calculator`, but implement more behavior.
-###Polymorphism
+### Polymorphism
 Polymorphism doesn't work in Javascript the same way it works in other languages. Normally, when a child contains a 
 function with the same method signature as its parent, it will override it. In Javascript, when a child has a method the
 same as its parent and one tries to use said function, both the child's AND the parent's implementations will run. This
