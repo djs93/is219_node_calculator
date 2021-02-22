@@ -6,6 +6,8 @@ const Power = require('./Operations/Power')
 const Root = require('./Operations/Root')
 const Calculation = require('./Models/Calculation')
 
+//every function in this class does one thing and one thing only, adhering to the S of SOLID
+//In the case of the operations, they do their job of three things (creating the calculation, adding it to history, and returning) very concisely by wrapping other functions together
 class Calculator{
     static Calculations = [];
     static Sum(a,b){
@@ -35,6 +37,7 @@ class Calculator{
     static ClearHistory(){
         this.Calculations = [];
     }
+    //This function allows the O of SOLID by letting custom calculations to be added besides the base ones
     static AddCalculation(calculation){
         this.Calculations.push(calculation);
     }
