@@ -9,37 +9,37 @@ const Calculation = require('./Models/Calculation')
 class Calculator{
     static Calculations = [];
     static Sum(a,b){
-        let calculation = new Calculation(a, b, Sum);
-        this.Calculations.push(calculation)
-        return calculation;
+        this.AddCalculation(new Calculation(a, b, Sum));
+        return this.GetLastCalculation();
     }
     static Difference(a,b){
-        let calculation = new Calculation(a, b, Difference);
-        this.Calculations.push(calculation)
-        return calculation;
+        this.AddCalculation(new Calculation(a, b, Difference));
+        return this.GetLastCalculation();
     }
     static Product(a,b){
-        let calculation = new Calculation(a, b, Product);
-        this.Calculations.push(calculation)
-        return calculation;
+        this.AddCalculation(new Calculation(a, b, Product));
+        return this.GetLastCalculation();
     }
     static Quotient(a,b){
-        let calculation = new Calculation(a, b, Quotient);
-        this.Calculations.push(calculation)
-        return calculation;
+        this.AddCalculation(new Calculation(a, b, Quotient));
+        return this.GetLastCalculation();
     }
     static Square(a){
-        let calculation = new Calculation(a, 2, Power);
-        this.Calculations.push(calculation)
-        return calculation;
+        this.AddCalculation(new Calculation(a, 2, Power));
+        return this.GetLastCalculation();
     }
     static SquareRoot(a){
-        let calculation = new Calculation(a, 2, Root);
-        this.Calculations.push(calculation)
-        return calculation;
+        this.AddCalculation(new Calculation(a, 2, Root));
+        return this.GetLastCalculation();
     }
     static ClearHistory(){
         this.Calculations = [];
+    }
+    static AddCalculation(calculation){
+        this.Calculations.push(calculation);
+    }
+    static GetLastCalculation(){
+        return this.Calculations[this.Calculations.length - 1];
     }
 }
 module.exports = Calculator;

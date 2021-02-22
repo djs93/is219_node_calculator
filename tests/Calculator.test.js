@@ -54,16 +54,38 @@ test('Calculator ClearHistory', () => {
     Calculator.ClearHistory();
     expect(Calculator.Calculations.length).toBe(0);
 });
-test('Calculator adding to Calculations', () => {
+test('Calculator adding to Calculations after doing operation', () => {
     Calculator.ClearHistory()
     Calculator.SquareRoot(4);
     Calculator.Square(4);
     Calculator.Sum(4,2);
     expect(Calculator.Calculations.length).toBe(3);
     Calculator.Calculations.forEach(function(calculation){
-        expect(calculation).toBeInstanceOf(Calculation)
+        expect(calculation).toBeInstanceOf(Calculation);
     })
-    expect(Calculator.Calculations[0].operation = Root)
-    expect(Calculator.Calculations[1].operation = Power)
-    expect(Calculator.Calculations[2].operation = Sum)
+    expect(Calculator.Calculations[0].operation = Root);
+    expect(Calculator.Calculations[1].operation = Power);
+    expect(Calculator.Calculations[2].operation = Sum);
+});
+
+test('Calculator adding to Calculations with AddCalculation', () => {
+    Calculator.ClearHistory()
+    Calculator.AddCalculation(new Calculation(1,2,Sum));
+    Calculator.AddCalculation(new Calculation(4,2,Root));
+    Calculator.AddCalculation(new Calculation(3,2,Product));
+    expect(Calculator.Calculations.length).toBe(3);
+    Calculator.Calculations.forEach(function(calculation){
+        expect(calculation).toBeInstanceOf(Calculation);
+    })
+    expect(Calculator.Calculations[0].operation = Sum);
+    expect(Calculator.Calculations[1].operation = Root);
+    expect(Calculator.Calculations[2].operation = Product);
+});
+
+test('Calculator get last Calculation', () => {
+    Calculator.ClearHistory()
+    Calculator.SquareRoot(4);
+    Calculator.Square(4);
+    Calculator.Sum(4,2);
+    expect(Calculator.GetLastCalculation().operation = Sum);
 });
