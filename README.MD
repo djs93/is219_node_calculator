@@ -169,3 +169,78 @@ this case `Dog`, it is required to have these methods implemented. The behavior 
 differ, but you know that every one of them has both the `animalSound` and `sleep` methods. This is useful when you have
 lists of all of these `Animals`, but don't care what the child type is. If we wanted all the `Animals` in a `Barn` to 
 sleep, we'd just have to call every `Animal`'s sleep method.
+
+---
+## OOP Design Patterns
+### Creational Patterns - Prototype - Calculator
+For this pattern, you can see it in the Calculator's `Copy` function. With this copy function, it takes care of the work
+needed to copy the calculation history to the new Calculator. Without this Prototype function, a user may forget to copy
+the calculation history. This then is not an exact copy. This function could also be used later when private variables
+are added so the Calculator's copy can also include these variables the user would never know about.
+```javascript
+Copy(){
+    let newCalc = new Calculator();
+    newCalc.Calculations = this.Calculations;
+    return newCalc;
+}
+```
+### Structural Patterns - Facade - CSV Reader & Calculator
+Both the Calculator and the CSV Reader offer a facade to the user. The Calculator's base functions provide an easier to
+use way of doing a calculation without having to create a Calculation object and specify its function, then add it to 
+the history. The CSV Reader offers a facade in the way it lets the user specify a model and filepath then populates that
+model from the CSV for the user, taking care of opening the file and reading through it, adding data when necessary.
+```javascript
+static Read_CSV(file_path, model_type) {
+    const options = {
+        columns: true,
+        delimiter: ',',
+        trim: true,
+        skip_empty_lines: true
+    };
+    let fileContents = fs.readFileSync(file_path);
+    const records = parse(fileContents, options)
+    let list = Array();
+    records.forEach(function (data) {
+        list.push(model_type.create(data));
+    })
+
+    return list;
+}
+```
+This lets a user get a list of Models just by specifying the path and Model type, avoiding the file opening and other
+complicated behavior inside the function.
+```javascript
+Sum(a,b){
+    this.AddCalculation(new Calculation(a, b, Sum));
+    return this.GetLastCalculation();
+}
+```
+This lets a user create a calculation, add it to the calculator history, and returns the calculation by only specifying 
+two numbers. 
+### Behavioral Patterns - Strategy - CSV Reader Models & Calculator Calculations
+By letting the CSV Reader take any kind of data model, and the Calculator Calculations take any kind of function (with 
+two parameters), we achieve a good example of the behavioral pattern of Strategy. We can have the CSV reader read a file
+with city data and give it the City model, or have it read a file with computer build data and give it a Computer model.
+With the Calculator Calculations, any function with two parameters can be substituted in. This could be something as 
+simple as a sum or complex like roots. 
+```javascript
+static Read_CSV(file_path, model_type) {
+    ...
+    records.forEach(function (data) {
+        list.push(model_type.create(data));
+    })
+    ...
+}
+```
+```javascript
+class Calculation{
+    constructor(a, b, operation){
+        this.a = a;
+        this.b = b;
+        this.operation = operation;
+    }
+    GetResults(){
+        return this.operation(this.a,this.b);
+    }
+}
+```
