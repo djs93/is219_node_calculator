@@ -9,39 +9,39 @@ const Calculation = require('./Models/Calculation')
 //every function in this class does one thing and one thing only, adhering to the S of SOLID
 //In the case of the operations, they do their job of three things (creating the calculation, adding it to history, and returning) very concisely by wrapping other functions together
 class Calculator{
-    static Calculations = [];
-    static Sum(a,b){
+    Calculations = [];
+    Sum(a,b){
         this.AddCalculation(new Calculation(a, b, Sum));
         return this.GetLastCalculation();
     }
-    static Difference(a,b){
+    Difference(a,b){
         this.AddCalculation(new Calculation(a, b, Difference));
         return this.GetLastCalculation();
     }
-    static Product(a,b){
+    Product(a,b){
         this.AddCalculation(new Calculation(a, b, Product));
         return this.GetLastCalculation();
     }
-    static Quotient(a,b){
+    Quotient(a,b){
         this.AddCalculation(new Calculation(a, b, Quotient));
         return this.GetLastCalculation();
     }
-    static Square(a){
+    Square(a){
         this.AddCalculation(new Calculation(a, 2, Power));
         return this.GetLastCalculation();
     }
-    static SquareRoot(a){
+    SquareRoot(a){
         this.AddCalculation(new Calculation(a, 2, Root));
         return this.GetLastCalculation();
     }
-    static ClearHistory(){
+    ClearHistory(){
         this.Calculations = [];
     }
     //This function allows the O of SOLID by letting custom calculations to be added besides the base ones
-    static AddCalculation(calculation){
+    AddCalculation(calculation){
         this.Calculations.push(calculation);
     }
-    static GetLastCalculation(){
+    GetLastCalculation(){
         return this.Calculations[this.Calculations.length - 1];
     }
 }
