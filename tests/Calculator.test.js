@@ -88,5 +88,14 @@ test('Calculator get last Calculation', () => {
     calculator.SquareRoot(4);
     calculator.Square(4);
     calculator.Sum(4,2);
-    expect(calculator.GetLastCalculation().operation = Sum);
+    expect(calculator.GetLastCalculation().operation).toBe(Sum);
+});
+
+test('Calculator copy method', () => {
+    calculator.ClearHistory()
+    calculator.SquareRoot(4);
+    calculator.Square(4);
+    calculator.Sum(4,2);
+    let newCalc = calculator.Copy();
+    expect(newCalc.Calculations).toBe(calculator.Calculations);
 });

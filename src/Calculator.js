@@ -44,5 +44,10 @@ class Calculator{
     GetLastCalculation(){
         return this.Calculations[this.Calculations.length - 1];
     }
+    Copy(){
+        let newCalc = new Calculator();
+        newCalc.Calculations = this.Calculations;
+        return newCalc;
+    }
 }
 module.exports = Calculator;
