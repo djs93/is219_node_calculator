@@ -25,3 +25,17 @@ test('City create model', () => {
     expect(result.admin_name).toBe('DaleVille');
     expect(result.capital).toBe('primary');
 });
+
+test('City create model with null data', () => {
+    let result = City.create();
+    expect(result).toBeInstanceOf(City);
+    expect(result.id).toBeUndefined();
+    expect(result.city).toBeUndefined();
+    expect(result.city_ascii).toBeUndefined();
+    expect(result.lat).toBeUndefined();
+    expect(result.lng).toBeUndefined();
+    expect(result.iso2).toBeUndefined();
+    expect(result.iso3).toBeUndefined();
+    expect(result.admin_name).toBeUndefined();
+    expect(result.capital).toBeUndefined();
+});
