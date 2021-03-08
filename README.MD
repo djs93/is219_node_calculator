@@ -217,30 +217,46 @@ Sum(a,b){
 ```
 This lets a user create a calculation, add it to the calculator history, and returns the calculation by only specifying 
 two numbers. 
-### Behavioral Patterns - Strategy - CSV Reader Models & Calculator Calculations
-By letting the CSV Reader take any kind of data model, and the Calculator Calculations take any kind of function (with 
-two parameters), we achieve a good example of the behavioral pattern of Strategy. We can have the CSV reader read a file
-with city data and give it the City model, or have it read a file with computer build data and give it a Computer model.
-With the Calculator Calculations, any function with two parameters can be substituted in. This could be something as 
-simple as a sum or complex like roots. 
+### Behavioral Patterns - Strategy - Calculator Calculations
+By modifying the Calculator to be able to substitute its calculate function, we achieve a good example of the behavioral
+pattern of Strategy. This lets algorithms be encapsulated and swapped out. (Corrected from my previously wrong example 
+of Strategy)
 ```javascript
-static Read_CSV(file_path, model_type) {
-    ...
-    records.forEach(function (data) {
-        list.push(model_type.create(data));
-    })
-    ...
-}
-```
-```javascript
-class Calculation{
-    constructor(a, b, operation){
-        this.a = a;
-        this.b = b;
-        this.operation = operation;
+class Calculator {
+    Calculations = [];
+    alg = "";
+
+    SetStrategy(alg) {
+        this.alg = alg;
     }
-    GetResults(){
-        return this.operation(this.a,this.b);
+    Calculate(a, b) {
+        this.AddCalculation(this.alg.calculate(a, b));
+        return this.GetLastCalculation();
+    }
+    AddCalculation(calculation){
+        this.Calculations.push(calculation);
+    }
+    GetLastCalculation(){
+        return this.Calculations[this.Calculations.length - 1];
+    }
+    ClearHistory(){
+        this.Calculations = [];
     }
 }
+
+var SumStrat = function() {
+    this.alg = function(a,b) {
+        return new Calculation(a,b,Sum);
+    }
+};
+var DifferenceStrat = function() {
+    this.alg = function(a,b) {
+        return new Calculation(a,b,Difference);
+    }
+};
+var calcy = new Calculator();
+calcy.SetStrategy(SumStrat);
+calcy.Calculate(4,5); //returns a calculation with a = 4, b = 5, and op = Sum. GetResults() returns 9.
+calcy.SetStrategy(DifferenceStrat);
+calcy.Calculate(9,4); //returns a calculation with a = 9, b = 4, and op = Difference. Get Results() returns 5.
 ```
